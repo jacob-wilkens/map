@@ -20,5 +20,6 @@ class Room{
         string getName();
         Door* getDoor(string direction);
         void setDoor(Door* theDoor, string direction);
+        bool hasDoor(string direction);
 }; 
 #endif

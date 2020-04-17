@@ -36,3 +36,17 @@ Door* Room::getDoor(string direction){
         return this->westDoor;
     }
 }
+
+bool Room::hasDoor(string direction){
+    if(direction == "North" && this->northDoor != 0){
+        return true;
+    } else if (direction == "South" && this->southDoor != 0){
+        return true;
+    } else if(direction == "East" && this->eastDoor != 0) {
+        return true;
+    } else if (direction == "West" && this->westDoor != 0) {
+        return true;
+    } else {
+        return false;
+    }
+}

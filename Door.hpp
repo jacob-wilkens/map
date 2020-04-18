@@ -12,7 +12,7 @@ class Door{
         Room* roomFrom;
 
     public:
-        Door(Room* roomTo, Room* roomFrom);
+        Door(Room* roomFrom, Room* roomTo);
         Room* getRoomFrom();
         Room* getRoomTo();
 };

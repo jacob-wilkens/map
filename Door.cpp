@@ -2,7 +2,7 @@
 
 
 
-Door::Door(Room* roomTo, Room* roomFrom){
+Door::Door(Room* roomFrom, Room* roomTo){
     this->roomFrom = roomFrom;
     this->roomTo = roomTo;
 }

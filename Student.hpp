@@ -1,3 +1,4 @@
+
 #ifndef Student_hpp
 #define Student_hpp
 #include <string>
@@ -15,5 +16,6 @@ class Student{
     string getName();
     void setRoom(Room* currentRoom);
     string getCurrentRoomName();
+    Room* getRoom();
 };
 #endif

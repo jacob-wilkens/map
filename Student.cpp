@@ -14,3 +14,6 @@ void Student::setRoom(Room* currentRoom){
 string Student::getCurrentRoomName(){
     return this->currentRoom->getName();
 }
+Room* Student::getRoom(){
+    return this->currentRoom;
+}

@@ -1,8 +1,13 @@
 class Door;
+class Student;
+class Queue;
 #ifndef Room_hpp
 #define Room_hpp
 #include <string>
 #include "Door.hpp"
+#include "Student.hpp"
+#include "Queue.hpp"
+
 
 using namespace std;
 
@@ -13,7 +18,8 @@ class Room{
         Door* southDoor;
         Door* eastDoor;
         Door* westDoor;
-        //inhabitants
+        Queue* people;
+        
 
     public:
         Room(string name);
@@ -21,5 +27,8 @@ class Room{
         Door* getDoor(string direction);
         void setDoor(Door* theDoor, string direction);
         bool hasDoor(string direction);
+        void addToPeople(Student* person);
+        Student* removePeople();
+        int peopleCount();
 }; 
 #endif

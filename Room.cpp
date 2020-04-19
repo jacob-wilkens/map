@@ -7,7 +7,8 @@ Room::Room(string name){
     this->northDoor = 0;
     this->eastDoor = 0;
     this->westDoor = 0;
-}
+    this->people = new Queue();
+    }
 
 string Room::getName(){
     return this->name;
@@ -49,4 +50,13 @@ bool Room::hasDoor(string direction){
     } else {
         return false;
     }
+}
+void Room::addToPeople(Student* person){
+    this->people->enqueue(person);
+}
+Student* Room::removePeople(){
+    return this->people->dequeue();
+}
+int Room::peopleCount(){
+    return this->people->getCount();
 }

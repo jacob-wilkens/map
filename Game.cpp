@@ -104,7 +104,7 @@ void Game::begin(){
         Room* currentRoom = this->player->getCurrentRoom();
         currentRoom->addStudent(this->player);
         cout << "The current room is " << currentRoom->getRoomName() << "\n";
-        cout << "The following students in the room are ";
+        cout << "The following students in the room are: ";
         currentRoom->display();
         cout << "\n";
         DirectionList* directions = currentRoom->displayDoorDirection();

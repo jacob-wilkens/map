@@ -9,5 +9,5 @@ int main(){
     cout << "\n";
     Game* g = new Game(name);
     g->begin();
-    cout << "You win\n";
+    cout << "You win\n\n";
 }

@@ -98,16 +98,6 @@ Game::Game(string name){
 
 }
 
-Student* Game::getPlayer(){
-    return this->player;
-}
-
-Room* Game::getcurrentRoom(){
-    return this->currentRoom;
-}
-Room* Game::getFinalRoom(){
-    return this->finalRoom;
-}
 void Game::begin(){
    
     while(this->finalRoom->getRoomName() != this->player->getCurrentRoom()->getRoomName()){

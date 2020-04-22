@@ -13,9 +13,6 @@ class Game{
         bool inputCheck(string input, DirectionList* directions);
     public:
         Game(string name);
-        Student * getPlayer();
-        Room* getcurrentRoom();
-        Room* getFinalRoom();
         void begin();
 
 };

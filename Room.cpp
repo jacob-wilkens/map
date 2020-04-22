@@ -1,62 +1,57 @@
 #include "Room.hpp"
+#include <iostream>
+using namespace std;
 
-
-Room::Room(string name){
-    this->name = name;
-    this->southDoor = 0;
-    this->northDoor = 0;
-    this->eastDoor = 0;
-    this->westDoor = 0;
-    this->people = new Queue();
-    }
-
-string Room::getName(){
-    return this->name;
+Room::Room(string title)
+{
+    this->title = title;
+    this-> collectionOfDoors[10];
+    this->currentNumberOfDoors = 0;
+    this->collectionOfStudents = new LinkedListOfStudents();
 }
-
-void Room::setDoor(Door* theDoor, string direction){
-    if(direction == "North"){
-        this->northDoor = theDoor;
-    } else if (direction == "South"){
-        this->southDoor = theDoor;
-    } else if(direction == "East") {
-        this->eastDoor = theDoor;
-    } else if (direction == "West") {
-        this->westDoor = theDoor;
-    }
+string Room::getRoomName(){
+    return this->title;
 }
-
-Door* Room::getDoor(string direction){
-    if(direction == "North"){
-        return this->northDoor;
-    } else if (direction == "South"){
-        return this->southDoor;
-    } else if(direction == "East") {
-        return this->eastDoor;
-    } else if (direction == "West") {
-        return this->westDoor;
-    }
+void Room::addDoor(Door* door){
+    this->collectionOfDoors[this->currentNumberOfDoors] = door;
+    this->currentNumberOfDoors++;
 }
-
-bool Room::hasDoor(string direction){
-    if(direction == "North" && this->northDoor != 0){
-        return true;
-    } else if (direction == "South" && this->southDoor != 0){
-        return true;
-    } else if(direction == "East" && this->eastDoor != 0) {
-        return true;
-    } else if (direction == "West" && this->westDoor != 0) {
-        return true;
-    } else {
-        return false;
+void Room::addStudent(Student* s){
+    this->collectionOfStudents->addFront(s);
+}
+DirectionList* Room::displayDoorDirection(){
+    DirectionList* myList = new DirectionList();
+    for(int i = 0; i < currentNumberOfDoors; i++){
+        Door* currentDoor = collectionOfDoors[i];
+        if(currentDoor->getRoomA()->getRoomName() == this->title){
+            cout << currentDoor->getRoomB()->getRoomName() << " is to the " << currentDoor->getRoomBDirection() << "\n";
+            myList->addFront(currentDoor->getRoomBDirection());
+        } else {
+            cout << currentDoor->getRoomA()->getRoomName() << " is to the " << currentDoor->getRoomADirection() << "\n";
+            myList->addFront(currentDoor->getRoomADirection());
+        }
+    }
+    return myList;
+}
+Room* Room::getNewRoom(string direction){
+    for(int i = 0; i < currentNumberOfDoors; i++){
+        Door* currentDoor = collectionOfDoors[i];
+        if(currentDoor->getRoomA()->getRoomName() == this->title){
+            if(currentDoor->getRoomBDirection() == direction){
+                return currentDoor->getRoomB();
+            }
+        } else if(currentDoor->getRoomB()->getRoomName() == this->title){
+            if(currentDoor->getRoomADirection() == direction){
+                return currentDoor->getRoomA();
+        } else {
+            continue;
+        }
+    }
     }
 }
-void Room::addToPeople(Student* person){
-    this->people->enqueue(person);
+void Room::removeStudent(){
+    this->collectionOfStudents->removeFront();
 }
-Student* Room::removePeople(){
-    return this->people->dequeue();
-}
-int Room::peopleCount(){
-    return this->people->getCount();
+void Room::display(){
+    this->collectionOfStudents->display();
 }

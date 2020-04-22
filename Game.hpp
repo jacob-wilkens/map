@@ -1,7 +1,6 @@
 #include "Student.hpp"
 #include "Door.hpp"
 #include "Room.hpp"
-#include <string>
 #include <array>
 using namespace std;
 
@@ -11,10 +10,12 @@ class Game{
         Room* currentRoom;
         array<Room*,2> config();
         Room* finalRoom;
+        bool inputCheck(string input, DirectionList* directions);
     public:
         Game(string name);
         Student * getPlayer();
         Room* getcurrentRoom();
         Room* getFinalRoom();
+        void begin();
 
 };

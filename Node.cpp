@@ -1,12 +1,11 @@
 #include "Node.hpp"
 
-Node::Node(Student* payload)
+Node::Node(string payload)
 {
     this->payload = payload;
-    this->nextNode = 0;
 }
 
-Student* Node::getPayload()
+string Node::getPayload()
 {
     return this->payload;
 }

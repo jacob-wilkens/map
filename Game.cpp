@@ -20,73 +20,73 @@ array<Room*,2> Game::config(){
     Room* room120 = new Room("120");
 
     //Doors
-    Door* hall175ToHall15 = new Door(hall175, hall15);
-    Door* hall15ToHall175 = new Door(hall15, hall175);
-    Door* hall15ToHall2 = new Door(hall15, hall2);
-    Door* hall2ToHall15 = new Door(hall2, hall15);
-    Door* hall2ToRoom18 = new Door(hall2, room118);
-    Door* room118tohall2 = new Door(room118, hall2);
-    Door* room118ToMac2 = new Door(room118, mac2);
-    Door* mac2toroom118 = new Door(mac2, room118);
-    Door* mac2toMac1 = new Door(mac2, mac1);
-    Door* mac1tomac2 = new Door(mac1, mac2);
-    Door* hall2tomac1 = new Door(hall2, mac1);
-    Door* mac1tohall2 = new Door(mac1, hall2);
-    Door* hall2toAdv1 = new Door(hall2, adv1);
-    Door* adv1tohall2 = new Door(adv1, hall2);
-    Door* adv1toAdv2 = new Door(adv1, adv2);
-    Door* adv2toadv1 = new Door(adv2, adv1);
-    Door* hall15toHall1 = new Door(hall15, hall1);
-    Door* hall1tohall15 = new Door(hall1, hall15);
-    Door* hall1toHall0 = new Door(hall1, hall0);
-    Door* hall0tohall1 = new Door(hall0, hall1);
-    Door* hall0tolobby = new Door(hall0, lobby);
-    Door* lobbytohall0 = new Door(lobby, hall0);
-    Door* hall0toroom120 = new Door(hall0, room120);
-    Door* room120tohall0 = new Door(room120, hall0);
-    Door* lobbytoesport = new Door(lobby, esport);
-    Door* esporttolobby = new Door(esport, lobby);
-    Door* lobbytooffice = new Door(lobby, office);
-    Door* officetolobby = new Door(office, lobby);
-    Door* lobbytoserver = new Door(lobby, server);
-    Door* servertolobby = new Door(server, lobby);
+    Door* hall15andhall175 = new Door("East", hall175, "West", hall15);
+    Door* hall15andhall2 = new Door("South", hall15,"North", hall2);
+    Door* hall2androom118 = new Door("East", hall2,"West", room118);
+    Door* room118andmac2 = new Door("South", room118,"North", mac2);
+    Door* mac2andmac1 = new Door("West", mac2,"East", mac1);
+    Door* mac1andhall2 = new Door("South", hall2,"North", mac1);
+    Door* hall2andadv1 = new Door("West", hall2,"East", adv1);
+    Door* adv1andadv2 = new Door("South", adv1,"North", adv2);
+    Door* hall15andhall1 = new Door("North", hall15,"South", hall1);
+    Door* hall1andhall0 = new Door("North", hall1,"South", hall0);
+    Door* hall0androom120 = new Door("North", hall0,"South", room120);
+    Door* hall0andlobby = new Door("East", hall0,"West", lobby);
+    Door* lobbyandserver = new Door("South", lobby,"North", server);
+    Door* lobbyandoffice = new Door("West", office,"East", lobby);
+    Door* lobbyandesport = new Door("North", lobby,"South", esport);
+
+
 
 
     //Set Room doors
-    hall175->setDoor(hall175ToHall15, "West");
-    hall15->setDoor(hall15ToHall175, "East");
-    hall15->setDoor(hall15ToHall2, "North");
-    hall2->setDoor(hall2ToHall15, "South");
-    hall2->setDoor(hall2tomac1, "North");
-    mac1->setDoor(mac1tohall2, "South");
-    hall2->setDoor(hall2toAdv1, "East");
-    adv1->setDoor(adv1tohall2, "West");
-    hall2->setDoor(hall2ToRoom18, "West");
-    room118->setDoor(room118tohall2, "East");
-    room118->setDoor(room118ToMac2, "North");
-    mac2->setDoor(mac2toroom118, "South");
-    mac2->setDoor(mac2toMac1, "East");
-    mac1->setDoor(mac1tomac2, "West");
-    adv1->setDoor(adv1toAdv2, "North");
-    adv2->setDoor(adv2toadv1, "South");
-    hall15->setDoor(hall15toHall1, "South");
-    hall1->setDoor(hall1tohall15, "North");
-    hall1->setDoor(hall1toHall0, "South");
-    hall0->setDoor(hall0tohall1, "North");
-    hall0->setDoor(hall0tolobby, "West");
-    lobby->setDoor(lobbytohall0, "East");
-    hall0->setDoor(hall0toroom120, "South");
-    room120->setDoor(room120tohall0, "North");
-    lobby->setDoor(lobbytoesport, "South");
-    esport->setDoor(esporttolobby, "North");
-    lobby->setDoor(lobbytoserver, "North");
-    server->setDoor(lobbytoserver, "South");
-    lobby->setDoor(lobbytooffice, "West");
-    office->setDoor(officetolobby, "West");
+    hall175->addDoor(hall15andhall175);
+    hall15->addDoor(hall15andhall175);
+    hall15->addDoor(hall15andhall1);
+    hall15->addDoor(hall15andhall2);
+    hall2->addDoor(hall2andadv1);
+    hall2->addDoor(hall2androom118);
+    hall2->addDoor(mac1andhall2);
+    hall2->addDoor(hall15andhall2);
+    mac1->addDoor(mac1andhall2);
+    mac1->addDoor(mac2andmac1);
+    adv1->addDoor(adv1andadv2);
+    adv1->addDoor(hall2andadv1);
+    adv2->addDoor(adv1andadv2);
+    room118->addDoor(room118andmac2);
+    room118->addDoor(hall2androom118);
+    mac2->addDoor(room118andmac2);
+    mac2->addDoor(mac2andmac1);
+    hall1->addDoor(hall15andhall1);
+    hall1->addDoor(hall1andhall0);
+    hall0->addDoor(hall0andlobby);
+    hall0->addDoor(hall1andhall0);
+    hall0->addDoor(hall0androom120);
+    room120->addDoor(hall0androom120);
+    lobby->addDoor(hall0andlobby);
+    lobby->addDoor(lobbyandesport);
+    lobby->addDoor(lobbyandoffice);
+    lobby->addDoor(lobbyandserver);
+    esport->addDoor(lobbyandesport);
+    server->addDoor(lobbyandserver);
+    office->addDoor(lobbyandoffice);
+
 
     Room* startingRoom = hall175;
     array<Room*, 2> ar = {hall175, room120};
     return ar;
+}
+
+bool Game::inputCheck(string input, DirectionList* directions){
+    bool isCorrect = false;
+   for(int i = 0; i < directions->getCount(); i++){
+       if(input == directions->getIndex(i)) {
+           isCorrect = true;
+           return isCorrect;
+       }
+   } 
+   cout << "Invalid Direction\n";
+   return isCorrect;
 }
 
 Game::Game(string name){
@@ -94,7 +94,7 @@ Game::Game(string name){
     this->currentRoom = ar[0];
     this->finalRoom = ar[1];
     this->player = new Student(name);
-    this->player->setRoom(this->currentRoom);
+    this->player->setCurrentRoom(this->currentRoom);
 
 }
 
@@ -107,4 +107,27 @@ Room* Game::getcurrentRoom(){
 }
 Room* Game::getFinalRoom(){
     return this->finalRoom;
+}
+void Game::begin(){
+   
+    while(this->finalRoom->getRoomName() != this->player->getCurrentRoom()->getRoomName()){
+        Room* currentRoom = this->player->getCurrentRoom();
+        currentRoom->addStudent(this->player);
+        cout << "The current room is " << currentRoom->getRoomName() << "\n";
+        cout << "The following students in the room are ";
+        currentRoom->display();
+        cout << "\n";
+        DirectionList* directions = currentRoom->displayDoorDirection();
+        cout << "Which direction would you like to go ";
+        string input;
+        cin >> input;
+        while(inputCheck(input, directions) == false){
+            cout << "Which direction would you like to go ";
+            cin >> input;
+        }
+        cout << "\n";
+        currentRoom->removeStudent();
+        currentRoom = currentRoom->getNewRoom(input);
+        this->player->setCurrentRoom(currentRoom);
+    }
 }

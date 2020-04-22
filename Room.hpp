@@ -1,34 +1,33 @@
-class Door;
-class Student;
-class Queue;
 #ifndef Room_hpp
 #define Room_hpp
+class Door; // allows us to reference door when door refereneces Room.
+class Student;
+class LinkedListOfStudents;
 #include <string>
+#include "LinkedListOfStudents.hpp"
 #include "Door.hpp"
 #include "Student.hpp"
-#include "Queue.hpp"
-
-
+#include <iostream>
+#include "DirectionList.hpp"
 using namespace std;
 
-class Room{
+class Room
+{
     private:
-        string name;
-        Door* northDoor;
-        Door* southDoor;
-        Door* eastDoor;
-        Door* westDoor;
-        Queue* people;
-        
-
+        string title;
+        Door* collectionOfDoors[10];
+        int currentNumberOfDoors;
+        LinkedListOfStudents* collectionOfStudents;
+    
     public:
-        Room(string name);
-        string getName();
-        Door* getDoor(string direction);
-        void setDoor(Door* theDoor, string direction);
-        bool hasDoor(string direction);
-        void addToPeople(Student* person);
-        Student* removePeople();
-        int peopleCount();
-}; 
+        Room(string title);
+        string getRoomName();
+        void addDoor(Door* door);
+        void addStudent(Student* s);
+        DirectionList* displayDoorDirection();
+        Room* getNewRoom(string direction);
+        void removeStudent();
+        void display();
+
+};
 #endif

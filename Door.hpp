@@ -1,19 +1,28 @@
 class Room;
-
+#include "Room.hpp"
+#include <string>
+#include <iostream>
 #ifndef Door_hpp
 #define Door_hpp
-#include "Room.hpp"
 
-//room to and from could switch so add setters for those fields
+using namespace std;
 
-class Door{
+class Door
+{
     private:
-        Room* roomTo;
-        Room* roomFrom;
+        string directionToRoomA;
+        string directionToRoomB;
+        Room* roomA;
+        Room* roomB;
+
 
     public:
-        Door(Room* roomFrom, Room* roomTo);
-        Room* getRoomFrom();
-        Room* getRoomTo();
+        Door(string directionFrom, Room* roomFrom, string directionTo, Room* roomTo);
+        Room* getRoomB();
+        Room* getRoomA();
+        string getRoomBDirection();
+        string getRoomADirection();
+
+
 };
 #endif

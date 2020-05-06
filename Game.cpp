@@ -119,11 +119,10 @@ Game::Game(string name){
 void Game::begin(){
    
     while(this->finalRoom->getRoomName() != this->player->getCurrentRoom()->getRoomName()){
-        Room* currentRoom = this->player->getCurrentRoom();
-        currentRoom->addStudent(this->player);
-        cout << "The current room is " << currentRoom->getRoomName() << "\n";
+        this->currentRoom->addStudent(this->player);
+        cout << "The current room is " << this->currentRoom->getRoomName() << "\n";
         cout << "The following students in the room are: ";
-        currentRoom->display();
+        this->currentRoom->display();
         cout << "\n";
         if(this->player->playerItemCount() > 0){
             string remove;
@@ -137,13 +136,13 @@ void Game::begin(){
                 if(removedItem->getName() != ""){
                     cout << "Item removed is: " << removedItem->getName();
                     cout << "\n";
-                    this->player->getCurrentRoom()->addItem(removedItem);
+                    this->currentRoom->addItem(removedItem);
                 }
             }
 
         }
-        if(currentRoom->getItemCount() >= 0){
-            currentRoom->displayItems();
+        if(this->currentRoom->getItemCount() >= 0){
+            this->currentRoom->displayItems();
             cout << "\n";
             string answer;
             cout << "Would you like to pickup an item: ";
@@ -152,21 +151,23 @@ void Game::begin(){
                 string itemName;
                 cout << "Enter the name of the item: ";
                 cin >> itemName;
-                Item* removedItem = this->player->getCurrentRoom()->removeItem(itemName);
+                Item* removedItem = this->currentRoom->removeItem(itemName);
                 if(removedItem->getName() != ""){
                     cout << "Item removed is: " << removedItem->getName();
                     this->player->addItem(removedItem);
                 }
             }
         }
-        cout << "\n" << "Would you like to view the inventory: ";
-        string inventoryInput;
-        cin >> inventoryInput;
-        if(inventoryInput == "Y" || inventoryInput == "Yes"){
-            this->player->displayItems();
-            cout << "\n";
+        if(this->player->playerItemCount() > 0){
+            cout << "\n" << "Would you like to view the inventory: ";
+            string inventoryInput;
+            cin >> inventoryInput;
+            if(inventoryInput == "Y" || inventoryInput == "Yes"){
+                this->player->displayItems();
+                cout << "\n";
         }
-        DirectionList* directions = currentRoom->displayDoorDirection();
+        }
+        DirectionList* directions = this->currentRoom->displayDoorDirection();
         cout << "Which direction would you like to go ";
         string input;
         cin >> input;
@@ -176,7 +177,7 @@ void Game::begin(){
         }
         cout << "\n";
         currentRoom->removeStudent();
-        currentRoom = currentRoom->getNewRoom(input);
-        this->player->setCurrentRoom(currentRoom);
+        this->currentRoom = this->currentRoom->getNewRoom(input);
+        this->player->setCurrentRoom(this->currentRoom);
     }
 }

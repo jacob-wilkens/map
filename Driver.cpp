@@ -1,5 +1,7 @@
 #include <iostream>
 #include "Game.hpp"
+#include "Item.hpp"
+#include "LinkedListOfItems.hpp"
 using namespace std;
 
 int main(){
@@ -10,4 +12,6 @@ int main(){
     Game* g = new Game(name);
     g->begin();
     cout << "You win\n\n";
+
+
 }

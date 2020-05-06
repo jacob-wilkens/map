@@ -2,6 +2,10 @@
 #include "Door.hpp"
 #include "Room.hpp"
 #include <array>
+#include "Item.hpp"
+class Student;
+class Room;
+class Item;
 using namespace std;
 
 class Game{

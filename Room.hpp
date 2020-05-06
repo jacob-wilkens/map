@@ -9,6 +9,8 @@ class LinkedListOfStudents;
 #include "Student.hpp"
 #include <iostream>
 #include "DirectionList.hpp"
+#include "LinkedListOfItems.hpp"
+#include "Item.hpp"
 using namespace std;
 
 class Room
@@ -18,6 +20,11 @@ class Room
         Door* collectionOfDoors[10];
         int currentNumberOfDoors;
         LinkedListOfStudents* collectionOfStudents;
+        int itemCount;
+        int maxItemCount;
+        LinkedListOfItems* items;
+
+        
     
     public:
         Room(string title);
@@ -28,6 +35,11 @@ class Room
         Room* getNewRoom(string direction);
         void removeStudent();
         void display();
+        void addItem(Item* item);
+        void displayItems();
+        Item* removeItem(string name);
+        int getItemCount();
+
 
 };
 #endif

@@ -2,17 +2,39 @@
 
 array<Room*,2> Game::config(){
 
+    //Items
+    Item* item1 = new Item("Pencil");
+    Item* item2 = new Item("Pen");
+    Item* item3 = new Item("Marker");
+    Item* item4 = new Item("Eraser");
+    Item* item5 = new Item("Bag");
+    Item* item6 = new Item("Notebook");
+    Item* item7 = new Item("Book");
+    Item* item8 = new Item("Folder");
+    Item* item9 = new Item("Box");
+    Item* item10 = new Item("Mat");
+
     //Rooms
     Room* hall175 = new Room("Hallway 1.75");
+    hall175->addItem(item1);
     Room* hall15 = new Room("Hallway 1.5");
+    hall15->addItem(item2);
     Room* hall2 = new Room("Hallway 2");
+    hall2->addItem(item3);
     Room* hall1 = new Room("Hallway 1");
+    hall1->addItem(item4);
     Room* hall0 = new Room("Hallway 0");
+    hall0->addItem(item5);
     Room* mac1 = new Room("Mac Lab 1");
+    mac1->addItem(item6);
     Room* mac2 = new Room("Mac Lab 2");
+    mac2->addItem(item7);
     Room* adv1 = new Room("Adv. Lab 1");
+    adv1->addItem(item8);
     Room* adv2 = new Room("Adv. Lab 2");
+    adv2->addItem(item9);
     Room* room118 = new Room("118");
+    room118->addItem(item10);
     Room* server = new Room("Server Room");
     Room* office = new Room("Locklair's Office");
     Room* lobby = new Room("Lobby");
@@ -35,9 +57,6 @@ array<Room*,2> Game::config(){
     Door* lobbyandserver = new Door("South", lobby,"North", server);
     Door* lobbyandoffice = new Door("West", office,"East", lobby);
     Door* lobbyandesport = new Door("North", lobby,"South", esport);
-
-
-
 
     //Set Room doors
     hall175->addDoor(hall15andhall175);
@@ -70,7 +89,6 @@ array<Room*,2> Game::config(){
     esport->addDoor(lobbyandesport);
     server->addDoor(lobbyandserver);
     office->addDoor(lobbyandoffice);
-
 
     Room* startingRoom = hall175;
     array<Room*, 2> ar = {hall175, room120};
@@ -107,6 +125,47 @@ void Game::begin(){
         cout << "The following students in the room are: ";
         currentRoom->display();
         cout << "\n";
+        if(this->player->playerItemCount() > 0){
+            string remove;
+            cout << "Would you like to remove and item: ";
+            cin >> remove;
+            if(remove == "Yes" || remove == "Y"){
+                string itemName;
+                cout << "Enter the name of the item: ";
+                cin >> itemName;
+                Item* removedItem = this->player->removeItem(itemName);
+                if(removedItem->getName() != ""){
+                    cout << "Item removed is: " << removedItem->getName();
+                    cout << "\n";
+                    this->player->getCurrentRoom()->addItem(removedItem);
+                }
+            }
+
+        }
+        if(currentRoom->getItemCount() >= 0){
+            currentRoom->displayItems();
+            cout << "\n";
+            string answer;
+            cout << "Would you like to pickup an item: ";
+            cin >> answer;
+            if(answer == "Y" || answer == "Yes"){
+                string itemName;
+                cout << "Enter the name of the item: ";
+                cin >> itemName;
+                Item* removedItem = this->player->getCurrentRoom()->removeItem(itemName);
+                if(removedItem->getName() != ""){
+                    cout << "Item removed is: " << removedItem->getName();
+                    this->player->addItem(removedItem);
+                }
+            }
+        }
+        cout << "\n" << "Would you like to view the inventory: ";
+        string inventoryInput;
+        cin >> inventoryInput;
+        if(inventoryInput == "Y" || inventoryInput == "Yes"){
+            this->player->displayItems();
+            cout << "\n";
+        }
         DirectionList* directions = currentRoom->displayDoorDirection();
         cout << "Which direction would you like to go ";
         string input;

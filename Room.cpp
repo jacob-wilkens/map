@@ -8,6 +8,9 @@ Room::Room(string title)
     this-> collectionOfDoors[10];
     this->currentNumberOfDoors = 0;
     this->collectionOfStudents = new LinkedListOfStudents();
+    this->itemCount = 0;
+    this->maxItemCount = 5;
+    this->items = new LinkedListOfItems();
 }
 string Room::getRoomName(){
     return this->title;
@@ -54,4 +57,38 @@ void Room::removeStudent(){
 }
 void Room::display(){
     this->collectionOfStudents->display();
+}
+void Room::displayItems(){
+    if(this->itemCount == 0){
+        cout << "There are no items in " << this->getRoomName();
+    } else {
+        cout << "The items in the room are ";
+        this->items->display();
+    }
+}
+void Room::addItem(Item* i){
+    this->items->addFront(i);
+    this->itemCount++;
+}
+Item* Room::removeItem(string name){
+    if(this->itemCount == 0){
+        cout << "No items to remove \n";
+        Item* tempItem = new Item("");
+        return 0;
+    } else {
+        Item* itemToRemove; 
+        int index = this->items->findIndexByName(name);
+        if(index == -1){
+            cout << "Item does not exit\n";
+            Item* tempItem = new Item("");
+            return tempItem;
+        } else {
+        itemToRemove = this->items->removeAtIndex(index);
+        this->itemCount--;
+        return itemToRemove;
+        }
+    }
+}
+int Room::getItemCount(){
+    return this->itemCount;
 }
